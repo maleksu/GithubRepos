@@ -1,4 +1,4 @@
-package com.df.githubrepos.data.model
+package com.df.githubrepos.domain.data.model
 
 data class GithubCommitModel(
     val message: String,

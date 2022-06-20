@@ -1,6 +1,7 @@
 package com.df.githubrepos.di
 
-import com.df.githubrepos.data.NetworkRepository
+import com.df.githubrepos.domain.data.NetworkRepository
+import com.df.githubrepos.domain.data.mapper.ToGithubRepoModelMapper
 import com.df.githubrepos.domain.DataRepository
 import com.df.githubrepos.domain.network.GithubApi
 import com.df.githubrepos.domain.network.RetrofitFactory
@@ -15,6 +16,7 @@ private val githubApi = RetrofitFactory().getRetrofitForApi(BASE_GITHUB_URL).cre
 )
 
 val appModule = module {
-    single<DataRepository>{NetworkRepository(githubApi)}
+    single { ToGithubRepoModelMapper() }
+    single<DataRepository>{ NetworkRepository(githubApi, get()) }
     viewModel { MainViewModel(get()) }
 }

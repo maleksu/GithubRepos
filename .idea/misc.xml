@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../.gradle/caches/transforms-3/b2bc220f70b760c8bed4b9e3948e1a6e/transformed/appcompat-1.4.2/res/layout/abc_search_view.xml" value="0.18645833333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/commit_row.xml" value="0.3380208333333333" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.3380208333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
