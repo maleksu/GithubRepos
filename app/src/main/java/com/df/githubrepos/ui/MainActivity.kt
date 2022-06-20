@@ -1,24 +1,19 @@
 package com.df.githubrepos.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.df.githubrepos.R
 import com.df.githubrepos.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import android.widget.ArrayAdapter
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
-import androidx.cursoradapter.widget.CursorAdapter
-import androidx.cursoradapter.widget.SimpleCursorAdapter
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,12 +40,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
-        viewModel.selectedRepo.observe(this, Observer { repo->
+        viewModel.selectedRepo.observe(this, { repo->
             repo?.commits?.let {
                 (binding.commentsRecyclerView.adapter as CommitAdapter).updateItems(it)
             }?:run {
                 (binding.commentsRecyclerView.adapter as CommitAdapter).updateItems(emptyList())
                 Toast.makeText(this@MainActivity, "Can't find the repo", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.textToShare.observe(this, { string->
+            if(string.isNotBlank()){
+                Toast.makeText(this@MainActivity, string, Toast.LENGTH_SHORT).show()
+                shareCommits(string)
             }
         })
     }
@@ -79,5 +81,18 @@ class MainActivity : AppCompatActivity() {
             })
         }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    fun prepareCommits(v: View) {
+        val selectedCommitsIdx = (binding.commentsRecyclerView.adapter as CommitAdapter).getSelectedItems()
+        viewModel.prepareCommitsToShare(selectedCommitsIdx)
+    }
+
+    private fun shareCommits(text:String){
+        val shareIntent = Intent()
+        shareIntent.action = Intent.ACTION_SEND
+        shareIntent.type="text/plain"
+        shareIntent.putExtra(Intent.EXTRA_TEXT, text)
+        startActivity(Intent.createChooser(shareIntent,getString(R.string.send_by)))
     }
 }

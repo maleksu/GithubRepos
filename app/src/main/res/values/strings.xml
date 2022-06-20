@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GithubRepos</string>
     <string name="search_label">find github repo</string>
+    <string name="send_by">share by</string>
 </resources>

@@ -10,8 +10,8 @@ internal class NetworkRepository
 constructor(private val service: GithubApi, private val mapper: ToGithubRepoModelMapper) : DataRepository{
     override suspend fun getRepo(repo: String): ApiResponse<GithubRepositoryModel> {
         return try {
-            val repository = service.getRepo(repo).await()
-            val commits = service.getCommitsForRepo(repo).await()
+            val repository = service.getRepoAsync(repo).await()
+            val commits = service.getCommitsForRepoAsync(repo).await()
             if( repository.isSuccessful && commits.isSuccessful) {
                 repository.body()?.let {
                     ApiResponse.Success(mapper.map(it, commits.body()))

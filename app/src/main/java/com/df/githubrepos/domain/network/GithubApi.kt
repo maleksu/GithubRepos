@@ -9,8 +9,8 @@ import retrofit2.http.Path
 
 interface GithubApi {
     @GET("repos/{ownerrepo}/commits")
-    fun getCommitsForRepo(@Path("ownerrepo", encoded = true) repo:String): Deferred<Response<List<GithubCommitDto>>>
+    fun getCommitsForRepoAsync(@Path("ownerrepo", encoded = true) repo:String): Deferred<Response<List<GithubCommitDto>>>
 
     @GET("repos/{ownerrepo}")
-    fun getRepo(@Path("ownerrepo", encoded = true) repo:String): Deferred<Response<GithubRepoDto>>
+    fun getRepoAsync(@Path("ownerrepo", encoded = true) repo:String): Deferred<Response<GithubRepoDto>>
 }

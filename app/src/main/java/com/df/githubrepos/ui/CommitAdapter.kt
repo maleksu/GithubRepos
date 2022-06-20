@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.df.githubrepos.databinding.CommitRowBinding
 import com.df.githubrepos.domain.data.model.GithubCommitModel
 
-
 class CommitAdapter: RecyclerView.Adapter<CommitsViewHolder>() {
 
     private var commits: List<GithubCommitModel> = emptyList()
@@ -34,7 +33,12 @@ class CommitAdapter: RecyclerView.Adapter<CommitsViewHolder>() {
 
     fun updateItems(items: List<GithubCommitModel>){
         commits = items
+        selected.clear()
         notifyDataSetChanged()
+    }
+
+    fun getSelectedItems():HashSet<Int>{
+        return selected
     }
 }
 
