@@ -1,6 +1,8 @@
 # GithubRepos
 Run instructions:
 
-Clone the repository using Android Studio
-Sync project with gradle files
-Run project on Emulator or Android device (minSdkVersion 22)
+1. Clone the repository using Android Studio
+
+2. Sync project with gradle files
+
+3. Run project on Emulator or Android device (minSdkVersion 22)
