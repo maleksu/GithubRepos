@@ -10,8 +10,6 @@ import com.df.githubrepos.domain.network.ApiResponse
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.HashMap
-import kotlin.collections.filterIndexed
-import kotlin.collections.joinToString
 import kotlin.collections.set
 
 
@@ -51,7 +49,7 @@ class MainViewModel(private val repository: DataRepository) : ViewModel() {
 
             val selectedCommits = selectedRepo.value?.commits
                 ?.filterIndexed { index, _ ->
-                selectedCommitsIdx.contains(index)
+                    selectedCommitsIdx.contains(index)
                 }
                 ?.joinToString(separator = ",\n") ?: ""
             _textToShare.value = selectedCommits

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.df.githubrepos.databinding.CommitRowBinding
 import com.df.githubrepos.domain.data.model.GithubCommitModel
 
-class CommitAdapter: RecyclerView.Adapter<CommitsViewHolder>() {
+class CommitAdapter : RecyclerView.Adapter<CommitsViewHolder>() {
 
     private var commits: List<GithubCommitModel> = emptyList()
     private val selected = HashSet<Int>()
@@ -22,7 +22,7 @@ class CommitAdapter: RecyclerView.Adapter<CommitsViewHolder>() {
         val commit = commits[position]
         holder.bind(commit, selected.contains(position))
         holder.itemView.setOnClickListener {
-            if(!selected.remove(position)) {
+            if (!selected.remove(position)) {
                 selected.add(position)
             }
             notifyItemChanged(position)
@@ -31,13 +31,13 @@ class CommitAdapter: RecyclerView.Adapter<CommitsViewHolder>() {
 
     override fun getItemCount(): Int = commits.size
 
-    fun updateItems(items: List<GithubCommitModel>){
+    fun updateItems(items: List<GithubCommitModel>) {
         commits = items
         selected.clear()
         notifyDataSetChanged()
     }
 
-    fun getSelectedItems():HashSet<Int>{
+    fun getSelectedItems(): HashSet<Int> {
         return selected
     }
 }
@@ -45,7 +45,7 @@ class CommitAdapter: RecyclerView.Adapter<CommitsViewHolder>() {
 class CommitsViewHolder(
     private val binding: CommitRowBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(commit: GithubCommitModel, selected:Boolean) {
+    fun bind(commit: GithubCommitModel, selected: Boolean) {
         binding.commitModel = commit
         binding.selected = selected
     }

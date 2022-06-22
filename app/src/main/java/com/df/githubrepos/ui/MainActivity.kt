@@ -40,17 +40,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
-        viewModel.selectedRepo.observe(this, { repo->
+        viewModel.selectedRepo.observe(this, { repo ->
             repo?.commits?.let {
                 (binding.commentsRecyclerView.adapter as CommitAdapter).updateItems(it)
-            }?:run {
+            } ?: run {
                 (binding.commentsRecyclerView.adapter as CommitAdapter).updateItems(emptyList())
                 Toast.makeText(this@MainActivity, "Can't find the repo", Toast.LENGTH_SHORT).show()
             }
         })
 
-        viewModel.textToShare.observe(this, { string->
-            if(string.isNotBlank()){
+        viewModel.textToShare.observe(this, { string ->
+            if (string.isNotBlank()) {
                 Toast.makeText(this@MainActivity, string, Toast.LENGTH_SHORT).show()
                 shareCommits(string)
             }
@@ -84,15 +84,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun prepareCommits(v: View) {
-        val selectedCommitsIdx = (binding.commentsRecyclerView.adapter as CommitAdapter).getSelectedItems()
+        val selectedCommitsIdx =
+            (binding.commentsRecyclerView.adapter as CommitAdapter).getSelectedItems()
         viewModel.prepareCommitsToShare(selectedCommitsIdx)
     }
 
-    private fun shareCommits(text:String){
+    private fun shareCommits(text: String) {
         val shareIntent = Intent()
         shareIntent.action = Intent.ACTION_SEND
-        shareIntent.type="text/plain"
+        shareIntent.type = "text/plain"
         shareIntent.putExtra(Intent.EXTRA_TEXT, text)
-        startActivity(Intent.createChooser(shareIntent,getString(R.string.send_by)))
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.send_by)))
     }
 }

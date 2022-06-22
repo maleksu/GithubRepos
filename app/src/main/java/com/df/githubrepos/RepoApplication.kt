@@ -5,7 +5,7 @@ import com.df.githubrepos.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class RepoApplication: Application() {
+class RepoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {

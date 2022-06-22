@@ -18,14 +18,15 @@ class RetrofitFactory {
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level =
-            if(BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
     }
 
     private val moshi = Moshi.Builder()
         .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
         .add(KotlinJsonAdapterFactory()).build()
 
-    private val okHttpClient: OkHttpClient = OkHttpClient().newBuilder().addInterceptor(loggingInterceptor).build()
+    private val okHttpClient: OkHttpClient =
+        OkHttpClient().newBuilder().addInterceptor(loggingInterceptor).build()
 
     private fun retrofit(baseUrl: String, httpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
