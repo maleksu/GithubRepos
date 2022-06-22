@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@{selected ? @color/teal_200 : 0}"
-        android:foreground="?selectableItemBackground">
+        >
 
 
         <TextView

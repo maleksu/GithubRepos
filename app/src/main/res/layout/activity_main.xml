@@ -2,11 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-    <variable
-        name="viewmodel"
-        type="com.df.githubrepos.ui.MainViewModel" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="com.df.githubrepos.ui.MainViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{viewmodel.selectedRepo.repositoryName}"
+            android:text="@{viewmodel.selectedRepo!=null ? (viewmodel.selectedRepo.repositoryName + ' '+viewmodel.selectedRepo.repositoryId) : `` }"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Repo name" />
@@ -39,10 +44,11 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
+            android:onClick="prepareCommits"
+            android:visibility="@{viewmodel.selectedRepo != null ? View.VISIBLE : View.GONE }"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/repoNameCaption"
-            app:srcCompat="@android:drawable/ic_menu_share"
-            android:onClick="prepareCommits"/>
+            app:srcCompat="@android:drawable/ic_menu_share" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
