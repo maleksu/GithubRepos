@@ -11,12 +11,11 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 
-private val githubApi = RetrofitFactory().getRetrofitForApi(BASE_GITHUB_URL).create(
-    GithubApi::class.java
-)
-
 val appModule = module {
+    single {RetrofitFactory().getRetrofitForApi(BASE_GITHUB_URL).create(
+        GithubApi::class.java
+    )}
     single { ToGithubRepoModelMapper() }
-    single<DataRepository>{ NetworkRepository(githubApi, get()) }
+    single<DataRepository>{ NetworkRepository(get(), get()) }
     viewModel { MainViewModel(get()) }
 }
